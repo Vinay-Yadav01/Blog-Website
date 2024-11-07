@@ -11,8 +11,9 @@ function App() {
   useEffect(() => {
     authService
       .getCurrentUser()
-      .then((res) => {
-        dispatch(login({ userData: res }))
+      .then((userData) => {
+        if(userData) dispatch(login({ userData}))
+        else dispatch(logout())
       })
       .catch(() => {
         dispatch(logout())
